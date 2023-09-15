@@ -101,7 +101,10 @@ class _HomePageState extends State<HomePage> {
                                           : null,
                                     ),
                                     title: Text(targetUser.fullName!),
-                                    subtitle: Text(chatRoomModel.lastMessage!),
+                                    subtitle: Text(
+                                      chatRoomModel.lastMessage!,
+                                      maxLines: 1,
+                                    ),
                                   );
                                 } else {
                                   return Container();
