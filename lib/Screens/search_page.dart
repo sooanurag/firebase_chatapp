@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_chatapp/Models/chatroom_model.dart';
-import 'package:firebase_chatapp/Models/textfield_model.dart';
 import 'package:firebase_chatapp/Screens/chatroom_page.dart';
 import 'package:firebase_chatapp/main.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,10 +78,27 @@ class _SearchPageState extends State<SearchPage> {
           ),
           child: Column(
             children: [
-              myTextField(
-                label: "User Name",
-                mycontroller: _searchController,
-                prefixIcon: Icons.person_2_rounded,
+              TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Empty!";
+                  } else {
+                    return null;
+                  }
+                },
+                controller: _searchController,
+                onChanged: (value) {
+                  setState(() {});
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  contentPadding: const EdgeInsets.all(20),
+                  label: const Text("User Name"),
+                  prefixIcon: const Icon(Icons.person),
+                  isDense: true,
+                ),
               ),
               const Divider(
                 height: 20,
