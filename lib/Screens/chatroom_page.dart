@@ -71,7 +71,7 @@ class _ChatroomPageState extends State<ChatroomPage> {
           children: [
             CircleAvatar(
               backgroundColor: Colors.grey,
-              backgroundImage: (widget.targetUserData.profilePicture != null)
+              backgroundImage: (widget.targetUserData.profilePicture!.isNotEmpty)
                   ? NetworkImage(widget.targetUserData.profilePicture!)
                   : null,
             ),

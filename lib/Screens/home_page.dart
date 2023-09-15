@@ -61,8 +61,15 @@ class _HomePageState extends State<HomePage> {
                           ChatRoomModel chatRoomModel = ChatRoomModel.fromMap(
                               querySnapshot.docs[index].data()
                                   as Map<String, dynamic>);
-                          String targetUserId =
-                              chatRoomModel.participants!["targetUser"];
+                          var keys = chatRoomModel.participants!.keys
+                              .where((element) =>
+                                  chatRoomModel.participants![element] == true)
+                              .toList();
+                          keys.remove(widget.userData.userId.toString());
+                          // print(keys);
+                          String targetUserId = keys[0];
+                          // String targetUserId =
+                          //     chatRoomModel.participants!["targetUser"];
                           return FutureBuilder(
                               future: FirebaseHelper.fetchUserDataModel(
                                   targetUserId),
@@ -87,11 +94,11 @@ class _HomePageState extends State<HomePage> {
                                     },
                                     leading: CircleAvatar(
                                       backgroundColor: Colors.grey,
-                                      backgroundImage:
-                                          (targetUser.profilePicture != null)
-                                              ? NetworkImage(
-                                                  targetUser.profilePicture!)
-                                              : null,
+                                      backgroundImage: (targetUser
+                                              .profilePicture!.isNotEmpty)
+                                          ? NetworkImage(
+                                              targetUser.profilePicture!)
+                                          : null,
                                     ),
                                     title: Text(targetUser.fullName!),
                                     subtitle: Text(chatRoomModel.lastMessage!),
